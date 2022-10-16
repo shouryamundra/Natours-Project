@@ -84,7 +84,6 @@ userSchema.pre(/^find/, function(next) {
 });
 
 userSchema.pre(/^find/, function(next) {
-  console.log(userSchema);
   this.populate('favorite');
   next();
 });
