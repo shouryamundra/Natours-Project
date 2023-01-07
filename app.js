@@ -18,6 +18,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const bookingController = require('./controllers/bookingController');
 const viewRouter = require('./routes/viewRoutes');
+const { connect } = require('http2');
 
 //Start Express  app
 const app = express();
@@ -31,34 +32,71 @@ app.use(cors());
 app.options('*', cors());
 // app.use(express.static(`${__dirname}/public`));
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(helmet());
+
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'", "'unsafe-inline'", 'ws:'],
+//       connectSrc: [
+//         'https://checkout.stripe.com',
+//         'https://api.stripe.com',
+//         'https://maps.googleapis.com',
+//         "'self'"
+//       ],
+//       frameSrc: [
+//         'https://checkout.stripe.com',
+//         'https://b.stripecdn.com',
+//         'https://js.stripe.com',
+//         'https://hooks.stripe.com',
+//         "'self'"
+//       ],
+//       scriptSrc: [
+//         'https://checkout.stripe.com',
+//         'https://b.stripecdn.com',
+//         'https://js.stripe.com',
+//         'https://maps.googleapis.com',
+//         "'self'"
+//       ],
+//       // styleSrc: ["'"],
+//       imgSrc: ['https://*.stripe.com', "'self'"],
+//       fontSrc: ["'self'", 'https:', 'data:']
+//     }
+//   })
+// );
 
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'", 'https:', 'data:', 'ws:'],
-      // connectSrc: [
-      //   "'self'",
-      //   '/api/v1/users/login',
-      //   '/api/v1/users/updateMe',
-      //   'ws://'
-      // ],
+      // defaultSrc: ["'self'", 'https:', 'data:', 'ws:'],
+      defaultSrc: ['*'],
+      connectSrc: ['*'],
       baseUri: ["'self'"],
       fontSrc: ["'self'", 'https:', 'data:'],
       scriptSrc: [
         "'self'",
         'https:',
-        'blob:'
-        //js.stripe.com/v3/',
-        // 'https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js',
-        // 'https://js.stripe.com/v3/
+        'blob:',
+        '*',
+        'unsafe-inline',
+        'js.stripe.com/v3/',
+        'https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js',
+        'https://js.stripe.com/v3'
       ],
-      // objectSrc: ["'none'"],
-      styleSrc: ["'self'", 'https:', 'unsafe-inline']
+      objectSrc: ["'none'"],
+      styleSrc: [
+        "'self'",
+        'https:',
+        'unsafe-inline',
+        'sha256-CwE3Bg0VYQOIdNAkbB/Btdkhul49qZuwgNCMPgNY5zw='
+      ]
       // upgradeInsecureRequests: []
     }
   })
 );
+
+// app.use(helmet({ contentSecurityPolicy: false }));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));

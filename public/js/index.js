@@ -138,31 +138,31 @@ if (reviewPage) {
   });
 }
 
-if (tour__page) {
-  const btnUpdate = document.querySelectorAll('.btn-update');
-  const btnDelete = document.querySelectorAll('.btn-delete');
-  const summary = document.querySelectorAll('#summary');
-  btnUpdate.forEach((btn, i) => {
-    btn.addEventListener('click', e => {
-      btn.textContent = 'Save';
-      summary[i].disabled = false;
-      btn.addEventListener('click', e => {
-        const tourId = btn.dataset.tourId;
-        btn.disabled = true;
-        btn.textContent = 'Saving...';
-        updateTour(tourId, summary[i].value);
-      });
-    });
-  });
-  btnDelete.forEach((btn, i) => {
-    btn.addEventListener('click', e => {
-      const tourId = btn.dataset.tourId;
-      btn.textContent = 'Removing...';
-      btn.disabled = true;
-      deleteTour(tourId);
-    });
-  });
-}
+// if (tour__page) {
+//   const btnUpdate = document.querySelectorAll('.btn-update');
+//   const btnDelete = document.querySelectorAll('.btn-delete');
+//   const summary = document.querySelectorAll('#summary');
+//   btnUpdate.forEach((btn, i) => {
+//     btn.addEventListener('click', e => {
+//       btn.textContent = 'Save';
+//       summary[i].disabled = false;
+//       btn.addEventListener('click', e => {
+//         const tourId = btn.dataset.tourId;
+//         btn.disabled = true;
+//         btn.textContent = 'Saving...';
+//         updateTour(tourId, summary[i].value);
+//       });
+//     });
+//   });
+//   btnDelete.forEach((btn, i) => {
+//     btn.addEventListener('click', e => {
+//       const tourId = btn.dataset.tourId;
+//       btn.textContent = 'Removing...';
+//       btn.disabled = true;
+//       deleteTour(tourId);
+//     });
+//   });
+// }
 
 if (favBtn) {
   favBtn.addEventListener('click', e => {

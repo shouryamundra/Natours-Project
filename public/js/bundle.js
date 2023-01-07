@@ -8978,27 +8978,28 @@ var bookTour = /*#__PURE__*/function () {
 
           case 3:
             session = _context.sent;
-            _context.next = 6;
+            console.log(session);
+            _context.next = 7;
             return stripe.redirectToCheckout({
               sessionId: session.data.session.id
             });
 
-          case 6:
-            _context.next = 12;
+          case 7:
+            _context.next = 13;
             break;
 
-          case 8:
-            _context.prev = 8;
+          case 9:
+            _context.prev = 9;
             _context.t0 = _context["catch"](0);
             console.log(_context.t0);
             (0, _alerts.showAlert)('error', _context.t0);
 
-          case 12:
+          case 13:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 9]]);
   }));
 
   return function bookTour(_x) {
@@ -9537,37 +9538,32 @@ if (reviewPage) {
       (0, _review.deleteReview)(reviewId);
     });
   });
-}
+} // if (tour__page) {
+//   const btnUpdate = document.querySelectorAll('.btn-update');
+//   const btnDelete = document.querySelectorAll('.btn-delete');
+//   const summary = document.querySelectorAll('#summary');
+//   btnUpdate.forEach((btn, i) => {
+//     btn.addEventListener('click', e => {
+//       btn.textContent = 'Save';
+//       summary[i].disabled = false;
+//       btn.addEventListener('click', e => {
+//         const tourId = btn.dataset.tourId;
+//         btn.disabled = true;
+//         btn.textContent = 'Saving...';
+//         updateTour(tourId, summary[i].value);
+//       });
+//     });
+//   });
+//   btnDelete.forEach((btn, i) => {
+//     btn.addEventListener('click', e => {
+//       const tourId = btn.dataset.tourId;
+//       btn.textContent = 'Removing...';
+//       btn.disabled = true;
+//       deleteTour(tourId);
+//     });
+//   });
+// }
 
-if (tour__page) {
-  var _btnUpdate = document.querySelectorAll('.btn-update');
-
-  var _btnDelete = document.querySelectorAll('.btn-delete');
-
-  var summary = document.querySelectorAll('#summary');
-
-  _btnUpdate.forEach(function (btn, i) {
-    btn.addEventListener('click', function (e) {
-      btn.textContent = 'Save';
-      summary[i].disabled = false;
-      btn.addEventListener('click', function (e) {
-        var tourId = btn.dataset.tourId;
-        btn.disabled = true;
-        btn.textContent = 'Saving...';
-        (0, _tour.updateTour)(tourId, summary[i].value);
-      });
-    });
-  });
-
-  _btnDelete.forEach(function (btn, i) {
-    btn.addEventListener('click', function (e) {
-      var tourId = btn.dataset.tourId;
-      btn.textContent = 'Removing...';
-      btn.disabled = true;
-      (0, _tour.deleteTour)(tourId);
-    });
-  });
-}
 
 if (favBtn) {
   favBtn.addEventListener('click', function (e) {
