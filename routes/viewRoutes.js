@@ -26,6 +26,22 @@ router.get(
 );
 
 router.get('/my-reviews', authController.protect, viewController.getMyReviews);
+router.get(
+  '/manage-reviews',
+  authController.protect,
+  viewController.getManageReviews
+);
+router.get(
+  '/manage-tours',
+  authController.protect,
+  viewController.getManageTours
+);
+router.get(
+  '/manage-users',
+  authController.protect,
+  viewController.getManageUsers
+);
+
 // router.post(
 //   '/submit-user-data',
 //   authController.protect,

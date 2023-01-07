@@ -97,6 +97,31 @@ exports.getMyReviews = catchAsync(async (req, res) => {
   });
 });
 
+exports.getManageReviews = catchAsync(async (req, res) => {
+  const allReviews = await Review.find();
+  res.status(200).render('review', {
+    title: 'Manage Reviews',
+    reviews: allReviews
+  });
+});
+
+exports.getManageTours = catchAsync(async (req, res) => {
+  const allTours = await Tour.find();
+  res.status(200).render('getTours', {
+    title: 'Manage Tours',
+    tours: allTours
+  });
+});
+
+exports.getManageUsers = catchAsync(async (req, res) => {
+  const allUsers = await User.find();
+  console.log(allUsers);
+  res.status(200).render('user', {
+    title: 'Manage Users',
+    users: allUsers
+  });
+});
+
 exports.getFavorites = catchAsync(async (req, res, next) => {
   const favoriteTours = await User.findById(req.user.id).select('favorite');
   const userName = req.user.name;

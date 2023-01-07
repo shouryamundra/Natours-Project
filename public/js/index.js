@@ -1,15 +1,16 @@
 /*eslint-disable*/
 import '@babel/polyfill';
-import { displayMap } from './mapbox';
+// import { displayMap } from './mapbox';
 import { login, logout } from './login';
 import { signup } from './signup';
 import { submitReview, updateReview, deleteReview } from './review';
+import { updateTour, deleteTour } from './tour';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
 import { addFavorite, removeFavorite } from './favorite';
 
-const mapBox = document.getElementById('map');
+// const mapBox = document.getElementById('map');
 const loginForm = document.querySelector('.form--login');
 const signupForm = document.querySelector('.form--signup');
 const header = document.querySelector('.section-header');
@@ -22,10 +23,10 @@ const favBtn = document.getElementById('favorite');
 
 const reviewPage = document.getElementById('review__page');
 
-if (mapBox) {
-  const locations = JSON.parse(mapBox.dataset.locations);
-  displayMap(locations);
-}
+// if (mapBox) {
+//   const locations = JSON.parse(mapBox.dataset.locations);
+//   displayMap(locations);
+// }
 
 if (loginForm) {
   loginForm.addEventListener('submit', e => {
@@ -72,6 +73,7 @@ if (userPasswordForm) {
 }
 
 if (bookBtn) {
+  console.log('Book Button');
   bookBtn.addEventListener('click', e => {
     e.target.textContent = 'Processing...';
     const { tourId } = e.target.dataset;
@@ -110,7 +112,7 @@ if (reviewPage) {
   const btnUpdate = document.querySelectorAll('.btn-update');
   const rating = document.querySelectorAll('#rating');
   const review = document.querySelectorAll('#review');
-  console.log({ rating, review });
+  // console.log({ rating, review });
   btnUpdate.forEach((btn, i) => {
     btn.addEventListener('click', e => {
       btn.textContent = 'Save';
@@ -132,6 +134,32 @@ if (reviewPage) {
       btn.textContent = 'Removing...';
       btn.disabled = true;
       deleteReview(reviewId);
+    });
+  });
+}
+
+if (tour__page) {
+  const btnUpdate = document.querySelectorAll('.btn-update');
+  const btnDelete = document.querySelectorAll('.btn-delete');
+  const summary = document.querySelectorAll('#summary');
+  btnUpdate.forEach((btn, i) => {
+    btn.addEventListener('click', e => {
+      btn.textContent = 'Save';
+      summary[i].disabled = false;
+      btn.addEventListener('click', e => {
+        const tourId = btn.dataset.tourId;
+        btn.disabled = true;
+        btn.textContent = 'Saving...';
+        updateTour(tourId, summary[i].value);
+      });
+    });
+  });
+  btnDelete.forEach((btn, i) => {
+    btn.addEventListener('click', e => {
+      const tourId = btn.dataset.tourId;
+      btn.textContent = 'Removing...';
+      btn.disabled = true;
+      deleteTour(tourId);
     });
   });
 }

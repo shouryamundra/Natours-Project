@@ -14,17 +14,18 @@ module.exports = class Email {
   newTransport() {
     if (
       process.env.NODE_ENV === 'production ' ||
-      process.env.NODE_ENV === 'production'
+      process.env.NODE_ENV === 'production' ||
+      process.env.NODE_ENV === 'development'
     ) {
       return nodemailer.createTransport({
         service: 'SendinBlue', // no need to set host or port etc.
         auth: {
-          user: 'shouryamundra@gmail.com',
-          pass: 'VFhjwRDaYd1CL3gW'
+          user: 'shouryamern@gmail.com',
+          pass: 'sJ3UYcQdSxfNnP7v'
         }
       });
     }
-
+    //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
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: process.env.EMAIL_POST,
